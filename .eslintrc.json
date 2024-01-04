@@ -10,7 +10,7 @@
   // We set parserOptions.project for the project to allow TypeScript to create the type-checker
   // behind the scenes when we run linting
   "parserOptions": {
-    "project": ["tsconfig.(app|spec).json"]
+    "project": ["tsconfig.(app|lib|spec).json"]
   },
   "overrides": [
     {
@@ -48,6 +48,8 @@
           "error",
           2
         ],
+        "semi": "off",
+        "@typescript-eslint/semi": ["error"],
         "@typescript-eslint/comma-dangle": "off",
         "@typescript-eslint/lines-between-class-members": "off",
         "@typescript-eslint/quotes": ["error","single"],
