@@ -6,18 +6,32 @@
         <p class="text-xs-center">
           <a routerLink="/login">Have an account?</a>
         </p>
-<!--        TODO: Add backend errors-->
+        <!--        TODO: Add backend errors-->
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <fieldset class="form-group">
-            <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              formControlName="username"
+              placeholder="Username" />
           </fieldset>
           <fieldset class="form-group">
-            <input type="text" class="form-control form-control-lg" formControlName="email" placeholder="Email">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              formControlName="email"
+              placeholder="Email" />
           </fieldset>
           <fieldset class="form-group">
-            <input type="password" class="form-control form-control-lg" formControlName="password" placeholder="Password">
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              formControlName="password"
+              placeholder="Password" />
           </fieldset>
-          <button type="submit" class="btn btn-lg btn-primary pull-xs-right">Sign up</button>
+          <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
+            Sign up
+          </button>
         </form>
       </div>
     </div>
