@@ -10,7 +10,7 @@
   // We set parserOptions.project for the project to allow TypeScript to create the type-checker
   // behind the scenes when we run linting
   "parserOptions": {
-    "project": ["tsconfig.(app|lib|spec).json"]
+    "project": ["tsconfig.json"]
   },
   "overrides": [
     {
@@ -68,7 +68,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "mc",
             "style": "kebab-case"
           }
         ]
