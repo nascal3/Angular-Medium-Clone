@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint-fix": "ng lint --fix",
-    "prettier-fix": "npx prettier --write ."
+    "pretty-fix": "npx prettier --write ."
   },
   "private": true,
   "dependencies": {
