@@ -1,15 +1,18 @@
+import { AsyncPipe } from '@angular/common'
 import { Component } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router'
 import { Store } from '@ngrx/store'
 
 import { register } from '../../store/actions'
+import { selectIsSubmitting } from '../../store/reducers'
+import { AuthStateInterface } from '../../types/authState.interface'
 import { RegisterRequestInterface } from '../../types/registerRequest.interface'
 
 @Component({
   selector: 'mc-register',
   templateUrl: './register.component.html',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, AsyncPipe],
   standalone: true,
 })
 export class RegisterComponent {
@@ -18,9 +21,11 @@ export class RegisterComponent {
     password: ['', Validators.required],
     email: ['', Validators.required],
   })
+
+  isSubmitting$ = this.store.select(selectIsSubmitting)
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store<{ auth: AuthStateInterface }>
   ) {}
 
   onSubmit() {
