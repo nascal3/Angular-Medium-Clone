@@ -6,10 +6,9 @@ import { CommonModule } from '@angular/common'
   selector: 'mc-backend-error-messages',
   templateUrl: './backendErrorMessages.component.html',
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class BackendErrorMessagesComponent implements OnInit {
-
   @Input() backendErrors: BackendErrorInterface = {}
 
   errorMessages: string[] = []

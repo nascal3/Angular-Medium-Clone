@@ -7,7 +7,7 @@ const initialState: AuthStateInterface = {
   isSubmitting: false,
   isLoading: false,
   currentUser: undefined,
-  validationErrors: null
+  validationErrors: null,
 }
 
 const authFeature = createFeature({
@@ -18,20 +18,20 @@ const authFeature = createFeature({
       ...state,
       isSubmitting: true,
       isLoading: true,
-      validationErrors: null
+      validationErrors: null,
     })),
     on(authActions.registerSuccess, (state, action) => ({
       ...state,
       isSubmitting: false,
       isLoading: false,
-      currentUser: action.currentUser
+      currentUser: action.currentUser,
     })),
     on(authActions.registerError, (state, action) => ({
       ...state,
       isSubmitting: false,
       isLoading: false,
-      validationErrors: action.errors
-    })),
+      validationErrors: action.errors,
+    }))
   ),
 })
 
@@ -41,5 +41,5 @@ export const {
   selectIsSubmitting,
   selectIsLoading,
   selectCurrentUser,
-  selectValidationErrors
+  selectValidationErrors,
 } = authFeature

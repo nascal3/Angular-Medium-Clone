@@ -7,7 +7,8 @@
           <p class="text-xs-center">
             <a routerLink="/login">Have an account?</a>
           </p>
-          <mc-backend-error-messages *ngIf="data.backendErrors"
+          <mc-backend-error-messages
+            *ngIf="data.backendErrors"
             [backendErrors]="data.backendErrors">
           </mc-backend-error-messages>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -44,4 +45,3 @@
     </div>
   </div>
 </ng-container>
-

@@ -10,7 +10,11 @@ import { PersistanceService } from '../../shared/services/persistance.service'
 import { Router } from '@angular/router'
 
 export const registerEffect = createEffect(
-  (actions$ = inject(Actions), authService = inject(AuthService), persistanceService = inject(PersistanceService)) => {
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    persistanceService = inject(PersistanceService)
+  ) => {
     return actions$.pipe(
       ofType(authActions.register),
       switchMap(({ request }) => {
@@ -22,7 +26,7 @@ export const registerEffect = createEffect(
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
               authActions.registerError({
-                errors: errorResponse.error.errors
+                errors: errorResponse.error.errors,
               })
             )
           })
@@ -42,5 +46,5 @@ export const redirectAfterRegisterEffect = createEffect(
       })
     )
   },
-  {functional: true, dispatch: false}
+  { functional: true, dispatch: false }
 )
