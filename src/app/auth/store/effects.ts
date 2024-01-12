@@ -5,6 +5,7 @@ import { catchError, map, of, switchMap } from 'rxjs'
 import { CurrentUserInterface } from '../../shared/types/currentUser.interface'
 import { AuthService } from '../services/auth.service'
 import { authActions } from './actions'
+import { HttpErrorResponse } from '@angular/common/http'
 
 export const registerEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService)) => {
@@ -13,12 +14,14 @@ export const registerEffect = createEffect(
       switchMap(({ request }) => {
         return authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             return authActions.registerSuccess({ currentUser })
           }),
-          catchError(() => {
-            return of(authActions.registerError())
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.registerError({
+                errors: errorResponse.error.errors
+              })
+            )
           })
         )
       })
