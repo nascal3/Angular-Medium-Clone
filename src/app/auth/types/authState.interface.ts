@@ -1,9 +1,13 @@
-import { CurrentUserInterface } from '../../shared/types/currentUser.interface'
 import { BackendErrorInterface } from '../../shared/types/backendError.interface'
+import { CurrentUserInterface } from '../../shared/types/currentUser.interface'
 
 export interface AuthStateInterface {
-  isSubmitting: boolean
+  isRegisterSubmitting: boolean
+  isLoginSubmitting: boolean
   currentUser: CurrentUserInterface | null | undefined
-  isLoading: boolean
+  currentLoggedUser: CurrentUserInterface | null | undefined
+  isRegisterLoading: boolean
+  isLoginLoading: boolean
   validationErrors: BackendErrorInterface | null
+  loginValidationErrors: BackendErrorInterface | null
 }

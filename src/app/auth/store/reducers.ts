@@ -1,45 +1,83 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
 
 import { AuthStateInterface } from '../types/authState.interface'
-import { authActions } from './actions'
+import { authLoginActions, authRegisterActions } from './actions'
 
 const initialState: AuthStateInterface = {
-  isSubmitting: false,
-  isLoading: false,
+  isRegisterSubmitting: false,
+  isLoginSubmitting: false,
+  isRegisterLoading: false,
+  isLoginLoading: false,
   currentUser: undefined,
+  currentLoggedUser: undefined,
   validationErrors: null,
+  loginValidationErrors: null,
 }
 
-const authFeature = createFeature({
-  name: 'auth',
+const authRegisterFeature = createFeature({
+  name: 'authRegister',
   reducer: createReducer(
     initialState,
-    on(authActions.register, state => ({
+    on(authRegisterActions.register, state => ({
       ...state,
-      isSubmitting: true,
-      isLoading: true,
+      isRegisterSubmitting: true,
+      isRegisterLoading: true,
       validationErrors: null,
     })),
-    on(authActions.registerSuccess, (state, action) => ({
+    on(authRegisterActions.registerSuccess, (state, action) => ({
       ...state,
-      isSubmitting: false,
-      isLoading: false,
+      isRegisterSubmitting: false,
+      isRegisterLoading: false,
       currentUser: action.currentUser,
     })),
-    on(authActions.registerError, (state, action) => ({
+    on(authRegisterActions.registerError, (state, action) => ({
       ...state,
-      isSubmitting: false,
-      isLoading: false,
+      isRegisterSubmitting: false,
+      isRegisterLoading: false,
       validationErrors: action.errors,
     }))
   ),
 })
 
+const authLoginFeature = createFeature({
+  name: 'authLogin',
+  reducer: createReducer(
+    initialState,
+    on(authLoginActions.login, state => ({
+      ...state,
+      isLoginSubmitting: true,
+      isLoginLoading: true,
+      validationErrors: null,
+    })),
+    on(authLoginActions.loginSuccess, (state, action) => ({
+      ...state,
+      isLoginSubmitting: false,
+      isLoginLoading: false,
+      currentLoggedUser: action.currentUser,
+    })),
+    on(authLoginActions.loginError, (state, action) => ({
+      ...state,
+      isLoginSubmitting: false,
+      isLoginLoading: false,
+      loginValidationErrors: action.errors,
+    }))
+  ),
+})
+
 export const {
-  name: authFeatureKey,
-  reducer: authReducer,
-  selectIsSubmitting,
-  selectIsLoading,
+  name: authRegisterFeatureKey,
+  reducer: authRegisterReducer,
+  selectIsRegisterSubmitting,
+  selectIsRegisterLoading,
   selectCurrentUser,
   selectValidationErrors,
-} = authFeature
+} = authRegisterFeature
+
+export const {
+  name: authLoginFeatureKey,
+  reducer: authLoginReducer,
+  selectIsLoginSubmitting,
+  selectIsLoginLoading,
+  selectCurrentLoggedUser,
+  selectLoginValidationErrors,
+} = authLoginFeature
