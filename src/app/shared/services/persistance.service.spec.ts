@@ -1,14 +1,14 @@
-import { PersistanceService} from './persistance.service'
 import { TestBed } from '@angular/core/testing'
+
+import { PersistanceService } from './persistance.service'
 
 describe('PersistenceService', () => {
   let persistenceService: PersistanceService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PersistanceService]
+      providers: [PersistanceService],
     }).compileComponents()
-
     persistenceService = TestBed.inject(PersistanceService)
   })
 
