@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { By } from '@angular/platform-browser'
 
 import { BackendErrorMessagesComponent } from './backendErrorMessages.component'
-import { By } from '@angular/platform-browser'
 
 describe('BackendErrorMessageComponent', () => {
   let component: BackendErrorMessagesComponent
@@ -21,7 +21,9 @@ describe('BackendErrorMessageComponent', () => {
   })
 
   it('should render default error state', () => {
-    const messageContainer = fixture.debugElement.query(By.css('.error-messages'))
+    const messageContainer = fixture.debugElement.query(
+      By.css('.error-messages')
+    )
 
     expect(messageContainer.nativeElement.textContent).toBe('')
   })
@@ -30,8 +32,12 @@ describe('BackendErrorMessageComponent', () => {
     component.errorMessages = ['Email already taken']
     fixture.detectChanges()
 
-    const messageContainer = fixture.debugElement.query(By.css('.error-messages li'))
+    const messageContainer = fixture.debugElement.query(
+      By.css('.error-messages li')
+    )
 
-    expect(messageContainer.nativeElement.textContent).toBe('Email already taken')
+    expect(messageContainer.nativeElement.textContent).toBe(
+      'Email already taken'
+    )
   })
 })
