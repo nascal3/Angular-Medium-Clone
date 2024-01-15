@@ -18,6 +18,5 @@ export class BackendErrorMessagesComponent implements OnInit {
       const messages = this.backendErrors[name].join(' ')
       return `${name}: ${messages}`
     })
-    console.log('errors>>>', this.backendErrors)
   }
 }
