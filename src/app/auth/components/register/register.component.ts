@@ -3,13 +3,14 @@ import { Component } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { combineLatest } from 'rxjs'
+import { combineLatest, map } from 'rxjs'
 
+// eslint-disable-next-line max-len
 import { BackendErrorMessagesComponent } from '../../../shared/components/backendErrorMessages/backendErrorMessages.component'
-import { authActions } from '../../store/actions'
+import { authRegisterActions } from '../../store/actions'
 import {
-  selectIsLoading,
-  selectIsSubmitting,
+  selectIsRegisterLoading,
+  selectIsRegisterSubmitting,
   selectValidationErrors,
 } from '../../store/reducers'
 import { RegisterRequestInterface } from '../../types/registerRequest.interface'
@@ -33,11 +34,17 @@ export class RegisterComponent {
     email: ['', Validators.required],
   })
 
-  data$ = combineLatest({
-    isSubmitting: this.store.select(selectIsSubmitting),
-    backendErrors: this.store.select(selectValidationErrors),
-    isLoading: this.store.select(selectIsLoading),
-  })
+  data$ = combineLatest([
+    this.store.select(selectIsRegisterSubmitting),
+    this.store.select(selectValidationErrors),
+    this.store.select(selectIsRegisterLoading),
+  ]).pipe(
+    map(([registerSubmitting, validationErrors, registerLoading]) => ({
+      registerSubmitting,
+      validationErrors,
+      registerLoading,
+    }))
+  )
   constructor(
     private fb: FormBuilder,
     private store: Store
@@ -48,6 +55,6 @@ export class RegisterComponent {
     const request: RegisterRequestInterface = {
       user: this.form.getRawValue(),
     }
-    this.store.dispatch(authActions.register({ request }))
+    this.store.dispatch(authRegisterActions.register({ request }))
   }
 }

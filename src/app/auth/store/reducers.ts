@@ -14,10 +14,11 @@ const initialState: AuthStateInterface = {
   loginValidationErrors: null,
 }
 
-const authRegisterFeature = createFeature({
-  name: 'authRegister',
+const authFeature = createFeature({
+  name: 'auth',
   reducer: createReducer(
     initialState,
+    // ==== register action reducers ====
     on(authRegisterActions.register, state => ({
       ...state,
       isRegisterSubmitting: true,
@@ -35,14 +36,8 @@ const authRegisterFeature = createFeature({
       isRegisterSubmitting: false,
       isRegisterLoading: false,
       validationErrors: action.errors,
-    }))
-  ),
-})
-
-const authLoginFeature = createFeature({
-  name: 'authLogin',
-  reducer: createReducer(
-    initialState,
+    })),
+    // ==== login action reducers ====
     on(authLoginActions.login, state => ({
       ...state,
       isLoginSubmitting: true,
@@ -65,19 +60,14 @@ const authLoginFeature = createFeature({
 })
 
 export const {
-  name: authRegisterFeatureKey,
-  reducer: authRegisterReducer,
+  name: authFeatureKey,
+  reducer: authReducer,
   selectIsRegisterSubmitting,
   selectIsRegisterLoading,
   selectCurrentUser,
   selectValidationErrors,
-} = authRegisterFeature
-
-export const {
-  name: authLoginFeatureKey,
-  reducer: authLoginReducer,
   selectIsLoginSubmitting,
   selectIsLoginLoading,
   selectCurrentLoggedUser,
   selectLoginValidationErrors,
-} = authLoginFeature
+} = authFeature

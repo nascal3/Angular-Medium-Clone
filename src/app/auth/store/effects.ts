@@ -7,7 +7,7 @@ import { catchError, map, of, switchMap, tap } from 'rxjs'
 import { PersistanceService } from '../../shared/services/persistance.service'
 import { CurrentUserInterface } from '../../shared/types/currentUser.interface'
 import { AuthService } from '../services/auth.service'
-import { authRegisterActions, authLoginActions } from './actions'
+import { authLoginActions, authRegisterActions } from './actions'
 
 export const registerEffect = createEffect(
   (
